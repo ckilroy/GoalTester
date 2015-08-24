@@ -101,5 +101,3 @@ def sign_in(username)
   fill_in "Password", with: "password"
   click_button 'Sign In'
 end
-
-end
