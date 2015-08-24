@@ -8,10 +8,16 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   has_many :goals
-
   has_many :completed_goals, -> { where completed: true }, class_name: 'Goal'
-
   has_many :private_goals, -> { where private: true }, class_name: 'Goal'
+
+  has_many :user_comments
+  has_many :authored_goal_comments,
+    class_name: "GoalComment",
+    foreign_key: :author_id
+  has_many :authored_user_comments,
+    class_name: "UserComment",
+    foreign_key: :author_id
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)
@@ -40,6 +46,10 @@ class User < ActiveRecord::Base
 
   def ensure_session_token
     self.session_token ||= User.generate_session_token
+  end
+
+  def authored_comments
+    self.authored_user_comments + self.authored_goal_comments
   end
 
 

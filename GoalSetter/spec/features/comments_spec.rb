@@ -69,15 +69,17 @@ feature "commenting" do
   end
 
   feature "comment on goal page" do
-
+    before :each do
+      sign_up("Sennacy")
+      visit "/goals"
+      make_public_goal
+    end
+  
     it "allows comments to be added to goal page" do
       expect(page).to have_content "Add Comment"
     end
 
     it "validates that comment has content" do
-      sign_up("Sennacy")
-      visit "/goals"
-      make_public_goal
       click_button "Add Comment"
       expect(page).to have_content "can't be blank"
     end

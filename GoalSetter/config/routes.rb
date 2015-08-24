@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   resource :session
 
   resources :goals
+  resources :goal_comments
+  resources :user_comments
 end

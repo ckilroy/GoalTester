@@ -54,5 +54,4 @@ module ApplicationHelper
     </form>
     HTML
   end
-
 end

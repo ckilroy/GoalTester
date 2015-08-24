@@ -23,3 +23,23 @@
 <% @user.completed_goals.each do |goal| %>
   Completed <%= goal.text %>
 <% end %>
+
+<h3>Comments</h3>
+<%= flash_errors %>
+<form action="<%= user_comments_url %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="user_comment[user_id]" value="<%= @user.id %>">
+  <label for="comment">Comment</label>
+  <textarea id="comment" name="user_comment[body]" rows="8" cols="40"></textarea>
+  <button>Add Comment</button>
+</form>
+<% @user.user_comments.each do |comment| %>
+  <%= comment.body %>
+  <% if current_user == comment.author || current_user == @user %>
+      <form action="<%= user_comment_url(comment) %>" method="post">
+        <%= auth_token %>
+        <%= delete_input %>
+        <button>Delete Comment</button>
+      </form>
+  <% end %>
+<% end %>
