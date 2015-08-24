@@ -18,6 +18,18 @@ module ApplicationHelper
     HTML
   end
 
+  def sign_up_link
+    <<-HTML.html_safe
+      <a href="#{new_user_url}">Sign Up</a>
+    HTML
+  end
+
+  def sign_in_link
+    <<-HTML.html_safe
+      <a href="#{new_session_url}">Sign In</a>
+    HTML
+  end
+
   def delete_input
    <<-HTML.html_safe
      <input type="hidden" name="_method" value="delete">

@@ -46,6 +46,12 @@ feature "the signup process" do
 
 
   feature "logging in" do
+
+    before :each do
+      sign_up_as_test_user
+      visit "/session/new"
+    end
+
     it "takes a password and a username" do
       expect(page).to have_content "Username"
       expect(page).to have_content "Password"
@@ -55,10 +61,30 @@ feature "the signup process" do
       expect(page).to have_content "Sign In"
     end
     it "shows username on the homepage after login" do
-      sign_in_test_user
+      sign_in_as_test_user
       expect(page).to have_content "tester"
     end
   end
 
-  
+  feature "logging out" do
+
+    it "begins with logged out state" do
+      visit "/session/new"
+      expect(page).to have_content "Sign In"
+    end
+
+    it "should be allowed on the home page" do
+      sign_in_as_test_user
+
+      expect(page).to have_content "Sign Out"
+    end
+
+    it "doesn't show username on the homepage after logout"do
+      sign_in_as_test_user
+      click_button "Sign Out"
+      visit "/goals/"
+      expect(page).not_to have_content "tester"
+    end
+  end
+
 end

@@ -103,5 +103,7 @@ def sign_in(username)
 end
 
 def sign_in_as_test_user
+  sign_up_as_test_user
+  click_button "Sign Out"
   sign_in("tester")
 end

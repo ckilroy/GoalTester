@@ -7,7 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-
+  <% if signed_in? %>
+    <%= sign_out_button %> / <%= current_user.username %>
+  <% else %>
+    <%= sign_in_link %> / <%= sign_up_link %>
+  <% end %>
+  <hr>
 <%= yield %>
 
 </body>
