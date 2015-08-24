@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  include Commentable
 
   validates :username, :session_token, :password_digest, presence: true
   validates :password, length: { minimum: 6, allow_nil: true }
@@ -8,10 +9,12 @@ class User < ActiveRecord::Base
   attr_reader :password
 
   has_many :goals
-
   has_many :completed_goals, -> { where completed: true }, class_name: 'Goal'
-
   has_many :private_goals, -> { where private: true }, class_name: 'Goal'
+
+  has_many :authored_comments,
+    class_name: "Comment",
+    foreign_key: :author_id
 
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)

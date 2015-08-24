@@ -14,3 +14,25 @@
   <%= delete_input %>
   <button>Delete Goal</button>
 </form>
+
+
+<h3>Comments</h3>
+<%= flash_errors %>
+<form action="<%= comments_url %>" method="post">
+  <%= auth_token %>
+<label for="comment">Comment</label>
+<textarea id="comment" name="comment[body]" rows="8" cols="40"></textarea>
+<input type="hidden" name="comment[commentable_type]" value="<%= @goal.class %>">
+<input type="hidden" name="comment[commentable_id]" value="<%= @goal.id %>">
+<button>Add Comment</button>
+</form>
+<% @goal.comments.each do |comment| %>
+  <%= comment.body %>
+  <% if current_user == comment.author || current_user.id == @goal.user_id %>
+    <form action="<%= comment_url(comment) %>" method="post">
+      <%= auth_token %>
+      <%= delete_input %>
+      <button>Delete Comment</button>
+    </form>
+    <% end %>
+<% end %>

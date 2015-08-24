@@ -71,6 +71,9 @@ feature "commenting" do
   feature "comment on goal page" do
 
     it "allows comments to be added to goal page" do
+      sign_up("Sennacy")
+      visit "/goals/"
+      make_public_goal
       expect(page).to have_content "Add Comment"
     end
 
