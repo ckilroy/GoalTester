@@ -101,3 +101,7 @@ def sign_in(username)
   fill_in "Password", with: "password"
   click_button 'Sign In'
 end
+
+def sign_in_as_test_user
+  sign_in("tester")
+end

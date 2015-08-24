@@ -34,7 +34,7 @@ feature "the signup process" do
 
     it "signing up redirects to the user's show page" do
       sign_up_as_test_user
-      expect(page).to have_content "tester"
+      expect(current_path).to match(/^\/users\/(\d)+/)
     end
 
     it "remains on sign up page on failed sign up" do
@@ -42,4 +42,23 @@ feature "the signup process" do
       expect(page).to have_content "Sign Up"
     end
   end
+
+
+
+  feature "logging in" do
+    it "takes a password and a username" do
+      expect(page).to have_content "Username"
+      expect(page).to have_content "Password"
+    end
+    it "remains on sign in page after failed sing in" do
+      click_button "Sign In"
+      expect(page).to have_content "Sign In"
+    end
+    it "shows username on the homepage after login" do
+      sign_in_test_user
+      expect(page).to have_content "tester"
+    end
+  end
+
+  
 end
