@@ -1,0 +1,12 @@
+<h1>All Goals</h1>
+
+<a href="<%= new_goal_url %>">Create New Goal</a>
+
+<% @goals.each do |goal| %>
+  <%= goal.text %> <br>
+  <form action="<%= goal_url(goal) %>" method="post">
+    <%= auth_token %>
+    <%= delete_input %>
+    <button>Delete Goal</button>
+  </form>
+<% end %>

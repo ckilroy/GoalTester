@@ -1,0 +1,10 @@
+<h1>Edit Goal</h1>
+
+<%= flash_errors %>
+
+<form action="<%= goal_url(@goal) %>" method="post">
+  <%= auth_token %>
+  <input type="hidden" name="_method" value="patch">
+  <%= render "partials/goal_form" %>
+  <button>Update Goal</button>
+</form>

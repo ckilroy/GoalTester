@@ -1,7 +1,7 @@
 class GoalsController < ApplicationController
 
   def index
-    @goals = Goal.all
+    @goals = Goal.all_public_goals + current_user.private_goals
   end
 
   def new

@@ -1,0 +1,16 @@
+<h1>Goal!</h1>
+
+<%= @goal.text %>
+
+<% if @goal.private %>
+  Private
+  <% else %>
+  Public
+<% end %>
+<a href="<%= edit_goal_url(@goal) %>">Edit Goal</a>
+
+<form action="<%= goal_url(@goal) %>" method="post">
+  <%= auth_token %>
+  <%= delete_input %>
+  <button>Delete Goal</button>
+</form>

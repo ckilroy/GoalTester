@@ -1,1 +1,16 @@
 <%= current_user.username %>
+<br>
+
+<% if @user == current_user %>
+  <% @user.goals.each do |goal| %>
+    <%= goal.text %> <br>
+    <%= goal.private ? "Private" : "Public" %>
+  <% end %>
+<% else %>
+  <% @user.goals.each do |goal| %>
+    <% unless goal.private %>
+      <%= goal.text %> <br>
+      Public
+    <% end %>
+  <% end %>
+<% end %>

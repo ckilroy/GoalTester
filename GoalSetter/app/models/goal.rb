@@ -3,4 +3,8 @@ class Goal < ActiveRecord::Base
 
   belongs_to :user
 
+  def self.all_public_goals
+    Goal.where(private: false)
+  end
+
 end

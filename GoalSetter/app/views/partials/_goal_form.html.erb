@@ -1,0 +1,18 @@
+
+
+<label for="goal_text">Text</label>
+<textarea id="goal_text" name="goal[text]" rows="8" cols="40"><%= @goal.text %></textarea>
+
+<label for="goal_private_private">Private</label>
+<input  id="goal_private_private"
+        type="radio"
+        name="goal[private]"
+        value="true"
+        <%= "checked" if @goal.private %>>
+        
+<label for="goal_private_public">Public</label>
+<input  id="goal_private_public"
+        type="radio"
+        name="goal[private]"
+        value="false"
+        <%= "checked" if !@goal.private %>>
