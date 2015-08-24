@@ -36,5 +36,10 @@ feature "the signup process" do
       sign_up_as_test_user
       expect(page).to have_content "tester"
     end
+
+    it "remains on sign up page on failed sign up" do
+      click_button "Sign Up"
+      expect(page).to have_content "Sign Up"
+    end
   end
 end
