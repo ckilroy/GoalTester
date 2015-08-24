@@ -5,27 +5,24 @@ feature "commenting" do
   feature "comment on user page" do
     before :each do
       sign_up("Sennacy")
-      visit "/goals"
-      make_public_goal
       sign_out
       sign_up("Breakfast")
       visit "/users/1/"
     end
 
     feature "comment creation" do
+
       it "allows comments to be added from the user page" do
         expect(page).to have_content "Add Comment"
       end
 
       it "directly adds comments to the page" do
-        fill_in "Comment", with: "test comment"
-        click_button "Add Comment"
+        make_comment("test comment")
         expect(page).to have_content "test comment"
       end
 
       it "should remain on the user page after submitting a comment" do
-        fill_in "Comment", with: "test comment"
-        click_button "Add Comment"
+        make_comment("test comment")
         expect(page).to have_content "test comment"
         expect(page).to have_content "Sennacy"
       end
@@ -39,8 +36,6 @@ feature "commenting" do
     feature "delete comments" do
       before :each do
         sign_up("Sennacy")
-        visit "/goals"
-        make_public_goal
         sign_out
         sign_up("Breakfast")
         visit "/users/1/"
@@ -70,25 +65,31 @@ feature "commenting" do
         visit "/users/1/"
         expect(page).not_to have_content "Delete Comment"
       end
-
     end
   end
 
-
   feature "comment on goal page" do
-    before :each do
+
+    it "allows comments to be added to goal page" do
+      expect(page).to have_content "Add Comment"
+    end
+
+    it "validates that comment has content" do
       sign_up("Sennacy")
       visit "/goals"
       make_public_goal
-      sign_out
-      sign_up("Breakfast")
-      visit "/goals/1/"
+      click_button "Add Comment"
+      expect(page).to have_content "can't be blank"
     end
 
     feature "adding comments to goal page" do
-
-      it "allows comments to be added to goal page" do
-        expect(page).to have_content "Add Comment"
+      before :each do
+        sign_up("Sennacy")
+        visit "/goals"
+        make_public_goal
+        sign_out
+        sign_up("Breakfast")
+        visit "/goals/1/"
       end
 
       it "adds comments directly to goal page" do
@@ -101,12 +102,6 @@ feature "commenting" do
         expect(page).to have_content "first comment"
         expect(page).to have_content "test public goal"
       end
-
-      it "validates that comment has content" do
-        click_button "Add Comment"
-        expect(page).to have_content "can't be blank"
-      end
-
     end
 
     feature "deleting comments from goal page" do
@@ -148,8 +143,6 @@ feature "commenting" do
         click_button "Delete Comment"
         expect(page).to have_content "test public goal"
       end
-
     end
-
   end
 end
