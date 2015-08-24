@@ -29,7 +29,7 @@ feature "the signup process" do
       fill_in "Username", with: "tester"
       fill_in "Password", with: "pass"
       click_button "Sign Up"
-      expect(page).to have_content "Password must be at least 6 characters"
+      expect(page).to have_content "Password is too short (minimum is 6 characters)"
     end
 
     it "signing up redirects to the user's show page" do

@@ -24,4 +24,12 @@ module ApplicationHelper
   HTML
   end
 
+  def flash_errors
+    if flash[:errors]
+      flash[:errors].map do |error|
+        "#{error}"
+      end.join("<br>").html_safe
+    end
+  end
+
 end
