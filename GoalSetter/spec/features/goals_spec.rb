@@ -78,11 +78,11 @@ feature "goal creation" do
       make_custom_private_goal("SECRET")
     end
 
-    feature "all public goals should be shown" do
+    it "all public goals should be shown" do
       expect(page).not_to have_content "test private goal"
     end
 
-    feature "only the current user's private goals should be shown" do
+    it "only the current user's private goals should be shown" do
       expect(page).not_to have_content "test private goal"
       expect(page).to have_content "SECRET"
     end
@@ -99,13 +99,13 @@ feature "goal creation" do
       make_custom_private_goal("SECRET")
     end
 
-    feature "only the user's public goals are visilbe" do
+    it "only the user's public goals are visilbe" do
       visit "/users/1"
       expect(page).to have_content "test public goal"
       expect(page).not_to have_content "test private goal"
     end
 
-    feature "current user can see their private and public goals" do
+    it "current user can see their private and public goals" do
       visit "/users/2"
       expect(page).to have_content "test public goal"
       expect(page).to have_content "SECRET"
