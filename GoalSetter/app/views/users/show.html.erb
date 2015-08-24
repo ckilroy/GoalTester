@@ -3,14 +3,22 @@
 
 <% if @user == current_user %>
   <% @user.goals.each do |goal| %>
+    <%= complete_goal_button(goal) %>
     <%= goal.text %> <br>
     <%= goal.private ? "Private" : "Public" %>
   <% end %>
 <% else %>
   <% @user.goals.each do |goal| %>
     <% unless goal.private %>
+    <%= complete_goal_button(goal) %>
       <%= goal.text %> <br>
       Public
     <% end %>
   <% end %>
+<% end %>
+
+
+<h3>Finished Goals</h3>
+<% @user.completed_goals.each do |goal| %>
+  Completed <%= goal.text %>
 <% end %>

@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
 
   has_many :goals
 
+  has_many :completed_goals, -> { where completed: true }, class_name: 'Goal'
+
+  has_many :private_goals, -> { where private: true }, class_name: 'Goal'
+
   def self.generate_session_token
     SecureRandom.urlsafe_base64(16)
   end
@@ -38,8 +42,5 @@ class User < ActiveRecord::Base
     self.session_token ||= User.generate_session_token
   end
 
-  def private_goals
-    self.goals.where(private: true)
-  end
 
 end

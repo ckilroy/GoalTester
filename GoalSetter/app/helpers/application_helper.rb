@@ -44,4 +44,15 @@ module ApplicationHelper
     end
   end
 
+  def complete_goal_button(goal)
+    <<-HTML.html_safe
+    <form action="#{goal_url(goal)}" method="post">
+      #{auth_token}
+    <input type="hidden" name="goal[completed]" value="true">
+    <input type="hidden" name="_method" value="patch">
+    <button>Complete Goal</button>
+    </form>
+    HTML
+  end
+
 end

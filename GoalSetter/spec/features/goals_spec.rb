@@ -130,3 +130,24 @@ feature "goal creation" do
     end
   end
 end
+
+feature "goal completion" do
+  before :each do
+    sign_up("Sennacy")
+    visit "/goals/"
+    make_private_goal
+  end
+
+  it "starts with uncompleted goals" do
+    expect(page).not_to have_content "Completed"
+  end
+
+  it "moves completed goals to Completed section" do
+    visit "/users/1"
+    click_button "Complete Goal"
+    expect(page).to have_content "Completed"
+  end
+
+
+
+end
