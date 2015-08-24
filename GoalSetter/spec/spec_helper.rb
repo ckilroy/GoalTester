@@ -109,7 +109,6 @@ def sign_in_as_test_user
 end
 
 def make_private_goal
-  sign_in_as_test_user
   click_link "Create New Goal"
   fill_in "Text", with: "test private goal"
   choose "Private"
@@ -117,9 +116,20 @@ def make_private_goal
 end
 
 def make_public_goal
-  sign_in_as_test_user
   click_link "Create New Goal"
   fill_in "Text", with: "test public goal"
   choose "Public"
   click_button "Add New Goal"
+end
+
+def make_custom_private_goal(goal)
+  click_link "Create New Goal"
+  fill_in "Text", with: goal
+  choose "Private"
+  click_button "Add New Goal"
+end
+
+
+def sign_out
+  click_button "Sign Out"
 end
