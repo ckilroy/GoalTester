@@ -133,3 +133,8 @@ end
 def sign_out
   click_button "Sign Out"
 end
+
+def make_comment(comment)
+  fill_in "Comment", with: comment
+  click_button "Add Comment"
+end

@@ -1,5 +1,6 @@
-<%= current_user.username %>
+<%= @user.username %>
 <br>
+
 
 <% if @user == current_user %>
   <% @user.goals.each do |goal| %>
